@@ -11,7 +11,6 @@ export default function Header({ onHistoryClick, historyCount }: HeaderProps) {
     <div className="pill-header-container">
       <header className="pill-header">
         <div className="header-logo-group">
-          <img src="/logo.png" alt="LabForge Logo" className="brand-logo" />
           <span className="brand-title">LabForge</span>
         </div>
 
