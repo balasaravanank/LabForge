@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DocumentInfoForm from "@/components/DocumentInfoForm";
 import ExperimentList from "@/components/ExperimentList";
 import PreviewModal from "@/components/PreviewModal";
@@ -10,6 +10,7 @@ import { useHistory } from "@/lib/useHistory";
 import { Eye, FileDown, FileText, Sparkles } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Header from "@/components/Header";
+import { loadSavedProfile, useSaveProfile } from "@/lib/useStudentProfile";
 
 const defaultDocInfo: DocumentInfo = {
   courseFullTitle: "",
@@ -28,6 +29,24 @@ export default function Home() {
   const [showHistory, setShowHistory] = useState(false);
   const [loading, setLoading] = useState<"pdf" | "docx" | null>(null);
   const { entries, addEntry, deleteEntry, clearAll } = useHistory();
+  const saveProfile = useSaveProfile();
+
+  // Hydrate saved profile after mount (client-only, avoids SSR mismatch)
+  useEffect(() => {
+    const profile = loadSavedProfile();
+    if (profile.studentName || profile.registerNumber) {
+      setDocInfo((prev) => ({
+        ...prev,
+        studentName: profile.studentName,
+        registerNumber: profile.registerNumber,
+      }));
+    }
+  }, []);
+
+  // Persist student identity on every change
+  useEffect(() => {
+    saveProfile(docInfo.studentName, docInfo.registerNumber);
+  }, [docInfo.studentName, docInfo.registerNumber, saveProfile]);
 
   const handleDownloadPDF = async () => {
     setLoading("pdf");
@@ -108,16 +127,18 @@ export default function Home() {
                 </div>
                 <div className="summary-row">
                   <span className="summary-label">Experiments</span>
-                  <span className="summary-value exp-count">{experiments.length}</span>
+                  {(() => {
+                    const filled = experiments.filter((e) => e.title.trim()).length;
+                    return filled > 0
+                      ? <span className="summary-value exp-count">{filled}</span>
+                      : <span className="summary-value">—</span>;
+                  })()}
                 </div>
               </div>
 
               {/* Actions */}
               <div className="actions-card card">
                 <h3 className="summary-title">Export</h3>
-                {!isReady && (
-                  <p className="not-ready-msg">Fill in course info, student details, and at least one experiment title to export.</p>
-                )}
                 <button
                   className="action-btn preview-btn"
                   onClick={() => setShowPreview(true)}

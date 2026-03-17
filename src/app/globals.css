@@ -1040,9 +1040,14 @@ input, button { font-family: inherit; }
   .form-grid-full { grid-template-columns: 1fr; }
   .form-grid-two { grid-template-columns: 1fr; }
   .header-badge { display: none; }
+  .main-content { padding-top: 88px; }
 }
 
 @media (max-width: 500px) {
-  .main-content { padding: 16px 12px; }
+  .pill-header-container {
+    width: calc(100% - 24px);
+    top: 10px;
+  }
+  .main-content { padding: 80px 14px 28px; }
   .card { padding: 16px 14px; }
 }
