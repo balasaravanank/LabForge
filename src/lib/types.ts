@@ -1,7 +1,6 @@
 export interface HistoryEntry {
   id: string;
   savedAt: string; // ISO timestamp
-  format: "pdf" | "docx";
   docInfo: DocumentInfo;
   experiments: Experiment[];
 }

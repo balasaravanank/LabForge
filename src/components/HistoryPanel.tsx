@@ -1,7 +1,7 @@
 "use client";
 
 import { HistoryEntry } from "@/lib/types";
-import { X, Trash2, RotateCcw, Clock, FileDown, FileText, Inbox } from "lucide-react";
+import { X, Trash2, RotateCcw, Clock, Save, Inbox } from "lucide-react";
 
 interface HistoryPanelProps {
   entries: HistoryEntry[];
@@ -73,17 +73,9 @@ export default function HistoryPanel({
             <ul className="history-list">
               {entries.map((entry) => (
                 <li key={entry.id} className="history-item">
-                  {/* Format badge */}
-                  <span
-                    className={`history-format-badge ${
-                      entry.format === "pdf" ? "badge-pdf" : "badge-docx"
-                    }`}
-                  >
-                    {entry.format === "pdf" ? (
-                      <><FileDown size={11} /> PDF</>
-                    ) : (
-                      <><FileText size={11} /> DOCX</>
-                    )}
+                  {/* Saved badge */}
+                  <span className="history-format-badge" style={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--border)" }}>
+                    <Save size={11} /> Saved
                   </span>
 
                   {/* Info */}

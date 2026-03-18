@@ -188,8 +188,8 @@ export async function generatePDF(docInfo: DocumentInfo, experiments: Experiment
     yPos += rowH;
   }
 
-  // ── DECLARATION — Bold 12pt ────────────────────────────────────────────
-  // Make sure we have enough space for the footer, otherwise add new page
+  // ── DECLARATION — Bold-italic 12pt ────────────────────────────────────────
+  // Ensure enough space for footer; add new page if needed
   if (yPos + 50 > 297) {
     pdf.addPage();
     yPos = mT;
@@ -199,20 +199,27 @@ export async function generatePDF(docInfo: DocumentInfo, experiments: Experiment
   pdf.setFont("times", "bolditalic");
   pdf.setFontSize(12);
   pdf.setTextColor(...BLACK);
-  pdf.text(
+  // Wrap declaration text within content width so it never overflows
+  const declText = pdf.splitTextToSize(
     "I confirm that the experiments and GitHub links provided are entirely my own work.",
-    mL,
-    yPos
+    contentW
   );
+  pdf.text(declText, mL, yPos);
+  yPos += declText.length * 5.5; // advance by wrapped line count
 
-  yPos += 12;
+  // ── NAME + REGISTER NUMBER ────────────────────────────────────────────────
+  yPos += 6;
   pdf.setFont("times", "normal");
+  pdf.setFontSize(12);
+  const regText = `Register Number : ${docInfo.registerNumber || ""}`;
   pdf.text(`Name : ${docInfo.studentName || ""}`, mL, yPos);
-  pdf.text(`Register Number : ${docInfo.registerNumber || ""}`, pageW - mR - pdf.getTextWidth(`Register Number : ${docInfo.registerNumber || ""}`), yPos);
+  pdf.text(regText, pageW - mR - pdf.getTextWidth(regText), yPos);
 
-  yPos += 12;
+  // ── DATE + LEARNER'S SIGNATURE ────────────────────────────────────────────
+  yPos += 10;
+  const sigText = `Learner's Signature`;
   pdf.text(`Date :`, mL, yPos);
-  pdf.text(`Learner's Signature`, pageW - mR - pdf.getTextWidth(`Learner's Signature`), yPos);
+  pdf.text(sigText, pageW - mR - pdf.getTextWidth(sigText), yPos);
 
   // ── SAVE ────────────────────────────────────────────────────────────────
   const sanitizedTitle = (docInfo.courseFullTitle || "LabRecord").replace(/[^a-zA-Z0-9()._-]/g, "_");

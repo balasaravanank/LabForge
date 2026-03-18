@@ -32,6 +32,31 @@
   --transition: 0.2s ease;
 }
 
+.dark {
+  /* ── Accent palette for dark mode (subtler backgrounds) ── */
+  --accent-red: #f43f5e;
+  --accent-red-bg: rgba(225, 29, 72, 0.15);
+  --accent-sky: #38bdf8;
+  --accent-sky-bg: rgba(2, 132, 199, 0.15);
+  --accent-green: #10b981;
+  --accent-green-bg: rgba(5, 150, 105, 0.15);
+  --accent-amber: #f59e0b;
+  --accent-amber-bg: rgba(217, 119, 6, 0.15);
+
+  /* ── Neutral B&W base (premium dark style, not pure black) ── */
+  --bg: #0a0a0a;
+  --surface: #121212;
+  --surface-2: #1a1a1a;
+  --border: #262626;
+  --border-strong: #333333;
+  --text: #ffffff;
+  --text-muted: #a3a3a3;
+
+  /* ── Shadows for dark mode ── */
+  --shadow-card: 0 1px 4px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-elevated: 0 6px 24px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4);
+}
+
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
@@ -606,9 +631,10 @@ input, button { font-family: inherit; }
 
 .doc-td-center { text-align: center; }
 
-/* Experiment title text */
+/* Experiment title text — bold 12pt (matches PDF + DOCX) */
 .doc-exp-title {
   font-size: 12pt;
+  font-weight: bold;
   font-family: "Times New Roman", Times, serif;
   color: #000;
   margin-bottom: 3px;
@@ -627,11 +653,12 @@ input, button { font-family: inherit; }
 
 .doc-exp-link:hover { color: #0341a0; }
 
-/* Declaration: bold italic */
+/* Declaration: bold italic — matches PDF bolditalic 12pt */
 .doc-declaration {
   font-family: "Times New Roman", Times, serif;
   font-size: 12pt;
   font-weight: bold;
+  font-style: italic;
   margin: 12px 0;
   color: #000;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { History } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 interface HeaderProps {
   onHistoryClick: () => void;
@@ -15,6 +16,7 @@ export default function Header({ onHistoryClick, historyCount }: HeaderProps) {
         </div>
 
         <div className="header-actions-group">
+          <ThemeToggle />
           <button
             className="header-history-btn"
             onClick={onHistoryClick}

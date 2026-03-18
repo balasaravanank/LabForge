@@ -53,7 +53,7 @@ export default function Home() {
     try {
       const { generatePDF } = await import("@/lib/generatePdf");
       await generatePDF(docInfo, experiments);
-      addEntry(docInfo, experiments, "pdf");
+      addEntry(docInfo, experiments);
     } finally {
       setLoading(null);
     }
@@ -64,7 +64,7 @@ export default function Home() {
     try {
       const { generateDOCX } = await import("@/lib/generateDocx");
       await generateDOCX(docInfo, experiments);
-      addEntry(docInfo, experiments, "docx");
+      addEntry(docInfo, experiments);
     } finally {
       setLoading(null);
     }

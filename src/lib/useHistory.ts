@@ -33,15 +33,31 @@ export function useHistory() {
   }, []);
 
   const addEntry = useCallback(
-    (docInfo: DocumentInfo, experiments: Experiment[], format: "pdf" | "docx") => {
-      const newEntry: HistoryEntry = {
-        id: crypto.randomUUID(),
-        savedAt: new Date().toISOString(),
-        format,
-        docInfo: { ...docInfo },
-        experiments: experiments.map((e) => ({ ...e })),
-      };
+    (docInfo: DocumentInfo, experiments: Experiment[]) => {
+      // Create a deterministic representation of the content to prevent duplicate spam
+      const contentHash = JSON.stringify({
+        doc: docInfo,
+        // ignore unique IDs when checking for duplicate content
+        exps: experiments.map((e) => ({ title: e.title, date: e.date, link: e.githubLink }))
+      });
+
       setEntries((prev) => {
+        // If the exact same content was just saved, don't create a new entry
+        if (prev.length > 0) {
+          const lastEntryHash = JSON.stringify({
+            doc: prev[0].docInfo,
+            exps: prev[0].experiments.map((e) => ({ title: e.title, date: e.date, link: e.githubLink }))
+          });
+          if (contentHash === lastEntryHash) return prev;
+        }
+
+        const newEntry: HistoryEntry = {
+          id: crypto.randomUUID(),
+          savedAt: new Date().toISOString(),
+          docInfo: { ...docInfo },
+          experiments: experiments.map((e) => ({ ...e })),
+        };
+
         const updated = [newEntry, ...prev].slice(0, MAX_ENTRIES);
         writeToStorage(updated);
         return updated;
