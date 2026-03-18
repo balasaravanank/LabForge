@@ -207,19 +207,19 @@ export async function generatePDF(docInfo: DocumentInfo, experiments: Experiment
   pdf.text(declText, mL, yPos);
   yPos += declText.length * 5.5; // advance by wrapped line count
 
-  // ── NAME + REGISTER NUMBER ────────────────────────────────────────────────
+  // ── NAME + SIGNATURE ──────────────────────────────────────────────────────
   yPos += 6;
   pdf.setFont("times", "normal");
   pdf.setFontSize(12);
-  const regText = `Register Number : ${docInfo.registerNumber || ""}`;
-  pdf.text(`Name : ${docInfo.studentName || ""}`, mL, yPos);
-  pdf.text(regText, pageW - mR - pdf.getTextWidth(regText), yPos);
+  
+  const rightColX = pageW / 2 + 10; // Fixed left-anchor for right column
 
-  // ── DATE + LEARNER'S SIGNATURE ────────────────────────────────────────────
+  pdf.text(`Name : ${docInfo.studentName || ""}`, mL, yPos);
+  pdf.text(`Register Number : ${docInfo.registerNumber || ""}`, rightColX, yPos);
+
   yPos += 10;
-  const sigText = `Learner's Signature`;
   pdf.text(`Date :`, mL, yPos);
-  pdf.text(sigText, pageW - mR - pdf.getTextWidth(sigText), yPos);
+  pdf.text(`Learner's Signature`, rightColX, yPos);
 
   // ── SAVE ────────────────────────────────────────────────────────────────
   const sanitizedTitle = (docInfo.courseFullTitle || "LabRecord").replace(/[^a-zA-Z0-9()._-]/g, "_");

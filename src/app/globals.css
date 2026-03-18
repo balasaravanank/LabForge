@@ -116,6 +116,15 @@ input, button { font-family: inherit; }
   width: 100%;
 }
 
+.dark .pill-header {
+  background: rgba(24, 24, 24, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 .header-logo-group {
   display: flex;
   align-items: center;
@@ -181,6 +190,10 @@ input, button { font-family: inherit; }
   background: rgba(0, 0, 0, 0.05);
 }
 
+.dark .icon-action:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .header-history-btn {
   display: flex;
   align-items: center;
@@ -203,6 +216,17 @@ input, button { font-family: inherit; }
   border-color: rgba(0, 0, 0, 0.2);
   color: var(--text);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dark .header-history-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .header-history-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .header-history-badge {

@@ -128,16 +128,16 @@ export default function PreviewModal({ docInfo, experiments, onClose }: Props) {
               I confirm that the experiments and GitHub links provided are entirely my own work.
             </p>
 
-            {/* Name + Register row */}
-            <div className="doc-sign-row">
-              <span>Name : {docInfo.studentName}</span>
-              <span>Register Number : {docInfo.registerNumber}</span>
-            </div>
-
-            {/* Date + Signature row */}
-            <div className="doc-sign-row">
-              <span>Date : </span>
-              <span>Learner&apos;s Signature</span>
+            {/* Signatures */}
+            <div style={{ display: 'flex', marginTop: '16px', fontSize: '12pt', fontFamily: '"Times New Roman", Times, serif', color: '#000' }}>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div>Name : {docInfo.studentName}</div>
+                <div>Date : </div>
+              </div>
+              <div style={{ flex: 1, paddingLeft: '10%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div>Register Number : {docInfo.registerNumber}</div>
+                <div>Learner&apos;s Signature</div>
+              </div>
             </div>
 
           </div>

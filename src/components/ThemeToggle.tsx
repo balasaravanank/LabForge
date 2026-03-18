@@ -14,7 +14,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="icon-btn" style={{ width: 34, height: 34 }} aria-label="Toggle theme">
+      <button className="icon-action" style={{ width: 34, height: 34 }} aria-label="Toggle theme">
         <div style={{ width: 16, height: 16 }} />
       </button>
     );
@@ -24,7 +24,8 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className="icon-btn"
+      className="icon-action"
+      style={{ width: 34, height: 34 }}
       onClick={() => setTheme(isDark ? "light" : "dark")}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-label="Toggle theme"

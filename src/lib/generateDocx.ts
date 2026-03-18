@@ -234,8 +234,8 @@ export async function generateDOCX(docInfo: DocumentInfo, experiments: Experimen
 
   // ── DECLARATION + FOOTER ─────────────────────────────────────────────────
   // Tab stop matching PDF: name on left, register number pushed right
-  // 7000 twips ≈ right side of A4 content area
-  const TAB_RIGHT = 7000;
+  // 5500 twips ≈ middle-right of A4 content area, ensuring left-alignment stays straight
+  const TAB_RIGHT = 5500;
 
   const doc = new Document({
     sections: [
