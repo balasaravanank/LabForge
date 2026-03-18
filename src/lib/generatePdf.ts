@@ -117,12 +117,15 @@ export async function generatePDF(docInfo: DocumentInfo, experiments: Experiment
     const qrData = exp.githubLink ? await generateQR(exp.githubLink) : "";
     const dateStr = formatDate(exp.date);
 
-    // Calculate row height
+    // Calculate row height — measure with bold 12pt (title) then switch back for link
+    pdf.setFont("times", "bold");
+    pdf.setFontSize(12);
     const nameText = pdf.splitTextToSize(exp.title, COL_W[2] - CELL_PAD * 2);
+    pdf.setFont("times", "normal");
+    pdf.setFontSize(11);
     const linkText = exp.githubLink
       ? pdf.splitTextToSize(exp.githubLink, COL_W[2] - CELL_PAD * 2)
       : [];
-    // 12pt = 4.23mm per line
     const lineH = 4.5;
     const textBlockH = nameText.length * lineH + (linkText.length > 0 ? lineH + linkText.length * lineH : 0);
     const minRowH = qrData ? Math.max(COL_W[3] - 2, 18) : 18;
@@ -152,7 +155,7 @@ export async function generatePDF(docInfo: DocumentInfo, experiments: Experiment
 
     // Name cell — title (bold 12pt) + github link (normal, blue, underlined, 11pt)
     let textY = yPos + CELL_PAD + lineH;
-    pdf.setFont("times", "normal");
+    pdf.setFont("times", "bold");
     pdf.setFontSize(12);
     pdf.setTextColor(...BLACK);
     pdf.text(nameText, COL_X[2] + CELL_PAD, textY);
