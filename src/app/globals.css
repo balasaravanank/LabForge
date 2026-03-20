@@ -524,6 +524,36 @@ input, button { font-family: inherit; }
 }
 .docx-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); background: #222; }
 
+/* ─── SHARE BUTTON ──────────────────────────────────────────────────── */
+.share-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+}
+
+.share-btn {
+  background: var(--surface);
+  color: var(--accent-green);
+  border: 1.5px solid rgba(5, 150, 105, 0.35);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.08);
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover:not(:disabled) {
+  background: var(--accent-green-bg);
+  border-color: var(--accent-green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.18);
+}
+
+.share-btn--copied {
+  background: var(--accent-green) !important;
+  color: #fff !important;
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.28) !important;
+  transform: none !important;
+}
+
 /* ─── INFO TIP ─────────────────────────────────────────────────────── */
 .info-tip {
   font-size: 0.78rem;

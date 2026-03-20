@@ -7,10 +7,11 @@ import PreviewModal from "@/components/PreviewModal";
 import HistoryPanel from "@/components/HistoryPanel";
 import { DocumentInfo, Experiment, HistoryEntry } from "@/lib/types";
 import { useHistory } from "@/lib/useHistory";
-import { Eye, FileDown, FileText, Sparkles } from "lucide-react";
+import { Eye, FileDown, FileText, Link2, Check } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Header from "@/components/Header";
 import { loadSavedProfile, useSaveProfile } from "@/lib/useStudentProfile";
+import { useShareableLink, readShareFromUrl } from "@/lib/useShareableLink";
 
 const defaultDocInfo: DocumentInfo = {
   courseFullTitle: "",
@@ -28,11 +29,19 @@ export default function Home() {
   const [showPreview, setShowPreview] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [loading, setLoading] = useState<"pdf" | "docx" | null>(null);
+  const [shareCopied, setShareCopied] = useState(false);
   const { entries, addEntry, deleteEntry, clearAll } = useHistory();
   const saveProfile = useSaveProfile();
+  const { copyShareLink } = useShareableLink();
 
-  // Hydrate saved profile after mount (client-only, avoids SSR mismatch)
+  // Hydrate from shared URL first, then fall back to saved profile
   useEffect(() => {
+    const shared = readShareFromUrl();
+    if (shared) {
+      setDocInfo(shared.docInfo);
+      setExperiments(shared.experiments);
+      return; // skip profile auto-fill when loading a share
+    }
     const profile = loadSavedProfile();
     if (profile.studentName || profile.registerNumber) {
       setDocInfo((prev) => ({
@@ -74,6 +83,12 @@ export default function Home() {
     setDocInfo({ ...entry.docInfo });
     setExperiments(entry.experiments.map((e) => ({ ...e })));
     setShowHistory(false);
+  };
+
+  const handleShare = async () => {
+    await copyShareLink(docInfo, experiments);
+    setShareCopied(true);
+    setTimeout(() => setShareCopied(false), 2500);
   };
 
   const isReady =
@@ -161,6 +176,22 @@ export default function Home() {
                 >
                   <FileText size={17} />
                   {loading === "docx" ? "Generating..." : "Download DOCX"}
+                </button>
+
+                {/* Divider */}
+                <div className="share-divider" />
+
+                {/* Share button */}
+                <button
+                  className={`action-btn share-btn${shareCopied ? " share-btn--copied" : ""}`}
+                  onClick={handleShare}
+                  disabled={!isReady}
+                >
+                  {shareCopied ? (
+                    <><Check size={17} /> Link Copied!</>
+                  ) : (
+                    <><Link2 size={17} /> Copy Share Link</>
+                  )}
                 </button>
               </div>
             </div>
