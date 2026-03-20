@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
+import LZString from "lz-string";
 import { DocumentInfo, Experiment } from "./types";
 
 interface SharePayload {
@@ -8,23 +9,22 @@ interface SharePayload {
   experiments: Experiment[];
 }
 
-/** Encodes project data into a URL-safe base64 string. */
+/** Encodes project data into a URL-safe highly compressed string. */
 export function encodeSharePayload(payload: SharePayload): string {
   const json = JSON.stringify(payload);
-  // btoa works on utf-8 strings via TextEncoder
-  const bytes = new TextEncoder().encode(json);
-  const binary = Array.from(bytes)
-    .map((b) => String.fromCharCode(b))
-    .join("");
-  return btoa(binary)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
+  return LZString.compressToEncodedURIComponent(json);
 }
 
-/** Decodes a base64 share payload back into project data. Returns null on failure. */
+/** Decodes a compressed or base64 share payload back into project data. Returns null on failure. */
 export function decodeSharePayload(encoded: string): SharePayload | null {
   try {
+    // First try the new LZString decompression
+    const decompressed = LZString.decompressFromEncodedURIComponent(encoded);
+    if (decompressed) {
+      return JSON.parse(decompressed) as SharePayload;
+    }
+    
+    // Fallback for older legacy base64-only links
     const b64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
     const binary = atob(b64);
     const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
@@ -45,24 +45,18 @@ export function buildShareUrl(payload: SharePayload): string {
   return `${base}?share=${encoded}`;
 }
 
-/** Hook — returns a function that copies a short share URL to the clipboard. */
+/** Hook — returns a function that copies a compressed URL to the clipboard. */
 export function useShareableLink() {
   const copyShareLink = useCallback(
     async (docInfo: DocumentInfo, experiments: Experiment[]): Promise<void> => {
-      const longUrl = buildShareUrl({ docInfo, experiments });
-      try {
-        const res = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
-        if (res.ok) {
-          const shortUrl = await res.text();
-          await navigator.clipboard.writeText(shortUrl);
-          return;
-        }
-      } catch (err) {
-        console.error("Failed to shorten link via TinyURL", err);
-      }
-      
-      // Fallback: if TinyURL fails, copy the long URL directly
-      await navigator.clipboard.writeText(longUrl);
+      // Exclude personal student info from the link so it only shares the template
+      const sanitizedDocInfo = {
+        ...docInfo,
+        studentName: "",
+        registerNumber: "",
+      };
+      const url = buildShareUrl({ docInfo: sanitizedDocInfo, experiments });
+      await navigator.clipboard.writeText(url);
     },
     []
   );

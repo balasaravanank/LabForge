@@ -29,7 +29,6 @@ export default function Home() {
   const [showPreview, setShowPreview] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [loading, setLoading] = useState<"pdf" | "docx" | null>(null);
-  const [isSharing, setIsSharing] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
   const { entries, addEntry, deleteEntry, clearAll } = useHistory();
   const saveProfile = useSaveProfile();
@@ -38,12 +37,19 @@ export default function Home() {
   // Hydrate from shared URL first, then fall back to saved profile
   useEffect(() => {
     const shared = readShareFromUrl();
-    if (shared) {
-      setDocInfo(shared.docInfo);
-      setExperiments(shared.experiments);
-      return; // skip profile auto-fill when loading a share
-    }
     const profile = loadSavedProfile();
+
+    if (shared) {
+      setDocInfo({
+        ...shared.docInfo,
+        // Keep the recipient's own details intact when opening someone else's template
+        studentName: profile.studentName || "",
+        registerNumber: profile.registerNumber || "",
+      });
+      setExperiments(shared.experiments);
+      return;
+    }
+
     if (profile.studentName || profile.registerNumber) {
       setDocInfo((prev) => ({
         ...prev,
@@ -87,14 +93,9 @@ export default function Home() {
   };
 
   const handleShare = async () => {
-    setIsSharing(true);
-    try {
-      await copyShareLink(docInfo, experiments);
-      setShareCopied(true);
-      setTimeout(() => setShareCopied(false), 2500);
-    } finally {
-      setIsSharing(false);
-    }
+    await copyShareLink(docInfo, experiments);
+    setShareCopied(true);
+    setTimeout(() => setShareCopied(false), 2500);
   };
 
   const isReady =
@@ -191,11 +192,9 @@ export default function Home() {
                 <button
                   className={`action-btn share-btn${shareCopied ? " share-btn--copied" : ""}`}
                   onClick={handleShare}
-                  disabled={!isReady || isSharing}
+                  disabled={!isReady}
                 >
-                  {isSharing ? (
-                    <span style={{opacity: 0.8}}>Generating...</span>
-                  ) : shareCopied ? (
+                  {shareCopied ? (
                     <><Check size={17} /> Link Copied!</>
                   ) : (
                     <><Link2 size={17} /> Copy Share Link</>
