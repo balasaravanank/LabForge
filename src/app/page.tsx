@@ -29,6 +29,7 @@ export default function Home() {
   const [showPreview, setShowPreview] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [loading, setLoading] = useState<"pdf" | "docx" | null>(null);
+  const [isSharing, setIsSharing] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
   const { entries, addEntry, deleteEntry, clearAll } = useHistory();
   const saveProfile = useSaveProfile();
@@ -86,9 +87,14 @@ export default function Home() {
   };
 
   const handleShare = async () => {
-    await copyShareLink(docInfo, experiments);
-    setShareCopied(true);
-    setTimeout(() => setShareCopied(false), 2500);
+    setIsSharing(true);
+    try {
+      await copyShareLink(docInfo, experiments);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2500);
+    } finally {
+      setIsSharing(false);
+    }
   };
 
   const isReady =
@@ -185,9 +191,11 @@ export default function Home() {
                 <button
                   className={`action-btn share-btn${shareCopied ? " share-btn--copied" : ""}`}
                   onClick={handleShare}
-                  disabled={!isReady}
+                  disabled={!isReady || isSharing}
                 >
-                  {shareCopied ? (
+                  {isSharing ? (
+                    <span style={{opacity: 0.8}}>Generating...</span>
+                  ) : shareCopied ? (
                     <><Check size={17} /> Link Copied!</>
                   ) : (
                     <><Link2 size={17} /> Copy Share Link</>

@@ -45,12 +45,24 @@ export function buildShareUrl(payload: SharePayload): string {
   return `${base}?share=${encoded}`;
 }
 
-/** Hook — returns a function that copies a share URL to the clipboard. */
+/** Hook — returns a function that copies a short share URL to the clipboard. */
 export function useShareableLink() {
   const copyShareLink = useCallback(
     async (docInfo: DocumentInfo, experiments: Experiment[]): Promise<void> => {
-      const url = buildShareUrl({ docInfo, experiments });
-      await navigator.clipboard.writeText(url);
+      const longUrl = buildShareUrl({ docInfo, experiments });
+      try {
+        const res = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
+        if (res.ok) {
+          const shortUrl = await res.text();
+          await navigator.clipboard.writeText(shortUrl);
+          return;
+        }
+      } catch (err) {
+        console.error("Failed to shorten link via TinyURL", err);
+      }
+      
+      // Fallback: if TinyURL fails, copy the long URL directly
+      await navigator.clipboard.writeText(longUrl);
     },
     []
   );

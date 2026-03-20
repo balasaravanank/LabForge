@@ -532,10 +532,16 @@ input, button { font-family: inherit; }
 }
 
 .share-btn {
+  height: 32px;
+  width: auto;
+  align-self: center;
+  padding: 0 14px;
+  font-size: 0.78rem;
+  border-radius: 999px;
   background: var(--surface);
   color: var(--accent-green);
   border: 1.5px solid rgba(5, 150, 105, 0.35);
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.08);
+  box-shadow: 0 1px 4px rgba(5, 150, 105, 0.08);
   transition: all 0.2s ease;
 }
 
@@ -543,14 +549,14 @@ input, button { font-family: inherit; }
   background: var(--accent-green-bg);
   border-color: var(--accent-green);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.18);
+  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.18);
 }
 
 .share-btn--copied {
   background: var(--accent-green) !important;
   color: #fff !important;
   border-color: var(--accent-green) !important;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.28) !important;
+  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.28) !important;
   transform: none !important;
 }
 
