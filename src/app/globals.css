@@ -1,18 +1,18 @@
-/* ─── RESET & BASE ─────────────────────────────────────────────────── */
+/* â”€â”€â”€ RESET & BASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* ── Accent palette (clean, minimal) ── */
-  --accent-red: #e11d48;      /* rose-600 – PDF / danger */
+  /* â”€â”€ Accent palette (clean, minimal) â”€â”€ */
+  --accent-red: #e11d48;      /* rose-600 â€“ PDF / danger */
   --accent-red-bg: #fff1f2;   /* rose-50 */
-  --accent-sky: #0284c7;      /* sky-600 – DOCX / load */
+  --accent-sky: #0284c7;      /* sky-600 â€“ DOCX / load */
   --accent-sky-bg: #f0f9ff;   /* sky-50 */
-  --accent-green: #059669;    /* emerald-600 – counts / success */
+  --accent-green: #059669;    /* emerald-600 â€“ counts / success */
   --accent-green-bg: #ecfdf5; /* emerald-50 */
-  --accent-amber: #d97706;    /* amber-600 – warnings */
+  --accent-amber: #d97706;    /* amber-600 â€“ warnings */
   --accent-amber-bg: #fffbeb; /* amber-50 */
 
-  /* ── Neutral B&W base ── */
+  /* â”€â”€ Neutral B&W base â”€â”€ */
   --bg: #f5f5f5;
   --surface: #ffffff;
   --surface-2: #fafafa;
@@ -21,11 +21,11 @@
   --text: #111111;
   --text-muted: #737373;
 
-  /* ── Shadows (neutral, no color tint) ── */
+  /* â”€â”€ Shadows (neutral, no color tint) â”€â”€ */
   --shadow-card: 0 1px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-elevated: 0 6px 24px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
 
-  /* ── Shared tokens ── */
+  /* â”€â”€ Shared tokens â”€â”€ */
   --radius: 14px;
   --radius-sm: 8px;
   --radius-xs: 5px;
@@ -33,7 +33,7 @@
 }
 
 .dark {
-  /* ── Accent palette for dark mode (subtler backgrounds) ── */
+  /* â”€â”€ Accent palette for dark mode (subtler backgrounds) â”€â”€ */
   --accent-red: #f43f5e;
   --accent-red-bg: rgba(225, 29, 72, 0.15);
   --accent-sky: #38bdf8;
@@ -43,7 +43,7 @@
   --accent-amber: #f59e0b;
   --accent-amber-bg: rgba(217, 119, 6, 0.15);
 
-  /* ── Neutral B&W base (premium dark style, not pure black) ── */
+  /* â”€â”€ Neutral B&W base (premium dark style, not pure black) â”€â”€ */
   --bg: #0a0a0a;
   --surface: #121212;
   --surface-2: #1a1a1a;
@@ -52,12 +52,22 @@
   --text: #ffffff;
   --text-muted: #a3a3a3;
 
-  /* ── Shadows for dark mode ── */
+  /* â”€â”€ Shadows for dark mode â”€â”€ */
   --shadow-card: 0 1px 4px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
   --shadow-elevated: 0 6px 24px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4);
 }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html { 
+  font-size: 16px; 
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
 
 body {
   font-family: inherit; /* Inherits from layout.tsx Next.js font */
@@ -70,7 +80,7 @@ body {
 
 input, button { font-family: inherit; }
 
-/* ─── APP STRUCTURE ────────────────────────────────────────────────── */
+/* â”€â”€â”€ APP STRUCTURE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .app-root { position: relative; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
 .hero-glow {
@@ -84,7 +94,7 @@ input, button { font-family: inherit; }
   z-index: 0;
 }
 
-/* ─── PILL HEADER ────────────────────────────────────────────────────── */
+/* â”€â”€â”€ PILL HEADER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .pill-header-container {
   position: fixed;
   top: 14px;
@@ -244,7 +254,7 @@ input, button { font-family: inherit; }
   line-height: 1;
 }
 
-/* ─── MAIN LAYOUT ──────────────────────────────────────────────────── */
+/* â”€â”€â”€ MAIN LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .main-content { flex: 1; padding: 80px 24px 28px; position: relative; z-index: 1; }
 
 .content-wrapper {
@@ -258,7 +268,7 @@ input, button { font-family: inherit; }
 
 .form-column { display: flex; flex-direction: column; gap: 20px; }
 
-/* ─── CARD ─────────────────────────────────────────────────────────── */
+/* â”€â”€â”€ CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -270,7 +280,7 @@ input, button { font-family: inherit; }
 
 .card:hover { box-shadow: var(--shadow-elevated); }
 
-/* ─── SECTION HEADER ───────────────────────────────────────────────── */
+/* â”€â”€â”€ SECTION HEADER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .section-title {
   font-size: 1rem;
   font-weight: 700;
@@ -300,7 +310,7 @@ input, button { font-family: inherit; }
 
 .header-actions { display: flex; gap: 8px; }
 
-/* ─── FORM FIELDS ──────────────────────────────────────────────────── */
+/* â”€â”€â”€ FORM FIELDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .form-grid-full { display: grid; grid-template-columns: 1fr 2fr; gap: 14px; }
 .form-grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .mt-4 { margin-top: 14px; }
@@ -337,7 +347,7 @@ input, button { font-family: inherit; }
 
 .field-group input::placeholder { color: #adb5bd; }
 
-/* ─── EXPERIMENT CARD ──────────────────────────────────────────────── */
+/* â”€â”€â”€ EXPERIMENT CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .experiments-stack { display: flex; flex-direction: column; gap: 14px; margin-bottom: 14px; }
 
 .experiment-card {
@@ -378,7 +388,7 @@ input, button { font-family: inherit; }
   letter-spacing: 0.4px;
 }
 
-/* ─── ADD EXPERIMENT BUTTON ────────────────────────────────────────── */
+/* â”€â”€â”€ ADD EXPERIMENT BUTTON â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .add-exp-btn {
   width: 100%;
   height: 44px;
@@ -399,7 +409,7 @@ input, button { font-family: inherit; }
   background: #f0f0f0;
 }
 
-/* ─── ICON BUTTONS ─────────────────────────────────────────────────── */
+/* â”€â”€â”€ ICON BUTTONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .icon-btn {
   width: 34px; height: 34px;
   border-radius: var(--radius-xs);
@@ -415,7 +425,7 @@ input, button { font-family: inherit; }
 .icon-btn:hover { border-color: #111; color: #111; background: #f0f0f0; }
 .icon-btn.danger:hover { border-color: var(--accent-red); color: var(--accent-red); background: var(--accent-red-bg); }
 
-/* ─── SIDE PANEL ───────────────────────────────────────────────────── */
+/* â”€â”€â”€ SIDE PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .side-panel { position: relative; }
 
 .sticky-panel {
@@ -471,7 +481,7 @@ input, button { font-family: inherit; }
   font-size: 0.78rem;
 }
 
-/* ─── ACTION BUTTONS ───────────────────────────────────────────────── */
+/* â”€â”€â”€ ACTION BUTTONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .actions-card { display: flex; flex-direction: column; gap: 10px; }
 
 .not-ready-msg {
@@ -524,7 +534,7 @@ input, button { font-family: inherit; }
 }
 .docx-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); background: #222; }
 
-/* ─── SHARE BUTTON ──────────────────────────────────────────────────── */
+/* â”€â”€â”€ SHARE BUTTON â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .share-divider {
   height: 1px;
   background: var(--border);
@@ -560,7 +570,7 @@ input, button { font-family: inherit; }
   transform: none !important;
 }
 
-/* ─── INFO TIP ─────────────────────────────────────────────────────── */
+/* â”€â”€â”€ INFO TIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .info-tip {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -569,7 +579,7 @@ input, button { font-family: inherit; }
   border-color: var(--border);
 }
 
-/* ─── PREVIEW MODAL ────────────────────────────────────────────────── */
+/* â”€â”€â”€ PREVIEW MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(0,0,0,0.55);
@@ -613,7 +623,7 @@ input, button { font-family: inherit; }
   flex: 1;
 }
 
-/* ─── DOCUMENT PREVIEW (matches Word output exactly) ──────────────── */
+/* â”€â”€â”€ DOCUMENT PREVIEW (matches Word output exactly) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 /* White paper sheet inside modal */
 .doc-preview {
   background: #fff;
@@ -648,7 +658,7 @@ input, button { font-family: inherit; }
   color: #000;
 }
 
-/* Plain table — single black borders, no colour header */
+/* Plain table â€” single black borders, no colour header */
 .doc-table {
   width: 100%;
   border-collapse: collapse;
@@ -691,7 +701,7 @@ input, button { font-family: inherit; }
 
 .doc-td-center { text-align: center; }
 
-/* Experiment title text — bold 12pt (matches PDF + DOCX) */
+/* Experiment title text â€” bold 12pt (matches PDF + DOCX) */
 .doc-exp-title {
   font-size: 12pt;
   font-weight: bold;
@@ -713,7 +723,7 @@ input, button { font-family: inherit; }
 
 .doc-exp-link:hover { color: #0341a0; }
 
-/* Declaration: bold italic — matches PDF bolditalic 12pt */
+/* Declaration: bold italic â€” matches PDF bolditalic 12pt */
 .doc-declaration {
   font-family: "Times New Roman", Times, serif;
   font-size: 12pt;
@@ -733,7 +743,7 @@ input, button { font-family: inherit; }
   margin-bottom: 8px;
 }
 
-/* ─── HISTORY DRAWER ───────────────────────────────────────────────── */
+/* â”€â”€â”€ HISTORY DRAWER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .history-overlay {
   position: fixed; inset: 0; z-index: 150;
   background: rgba(0,0,0,0.35);
@@ -920,7 +930,7 @@ input, button { font-family: inherit; }
   background: #f0f0f0;
 }
 
-/* ─── CALENDAR PICKER ──────────────────────────────────────────────── */
+/* â”€â”€â”€ CALENDAR PICKER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .cal-wrap {
   position: relative;
   width: 100%;
@@ -1107,7 +1117,7 @@ input, button { font-family: inherit; }
 }
 .cal-clear-btn:hover { background: rgba(255,255,255,0.1); color: #a3a3a3; }
 
-/* ─── FOOTER ───────────────────────────────────────────────────────── */
+/* â”€â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .app-footer {
   border-top: 1px solid var(--border);
   padding: 16px 24px;
@@ -1118,7 +1128,7 @@ input, button { font-family: inherit; }
   position: relative; z-index: 1;
 }
 
-/* ─── RESPONSIVE ───────────────────────────────────────────────────── */
+/* â”€â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 900px) {
   .content-wrapper {
     grid-template-columns: 1fr;
@@ -1137,4 +1147,244 @@ input, button { font-family: inherit; }
   }
   .main-content { padding: 80px 14px 28px; }
   .card { padding: 16px 14px; }
+}
+
+/* ─── SPLASH SCREEN ─────────────────────────────────────────────── */
+
+.sp-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  overflow: hidden;
+  background: var(--bg);
+  animation: spIn 0.5s ease forwards;
+}
+
+.sp-exit { animation: spOut 0.45s ease forwards; }
+
+@keyframes spIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(1.04); } }
+
+.sp-bg-mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(99,102,241,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 85%, rgba(14,165,233,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(236,72,153,0.04) 0%, transparent 70%);
+}
+
+.dark .sp-bg-mesh {
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(99,102,241,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 85%, rgba(14,165,233,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(236,72,153,0.08) 0%, transparent 70%);
+}
+
+.sp-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+}
+
+.sp-orb-a { width: 480px; height: 480px; top: -180px; left: -100px; background: rgba(99,102,241,0.12); opacity: 0.6; }
+.sp-orb-b { width: 380px; height: 380px; bottom: -140px; right: -60px; background: rgba(14,165,233,0.12); opacity: 0.6; }
+.sp-orb-c { width: 300px; height: 300px; top: 40%; left: 55%; background: rgba(236,72,153,0.08); opacity: 0.5; }
+
+.dark .sp-orb-a { opacity: 0.8; background: rgba(99,102,241,0.18); }
+.dark .sp-orb-b { opacity: 0.75; background: rgba(14,165,233,0.16); }
+.dark .sp-orb-c { opacity: 0.65; background: rgba(236,72,153,0.12); }
+
+.sp-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sp-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  animation: spItemIn 0.45s ease 0.05s both;
+}
+
+@keyframes spItemIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sp-logo-wrap {
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #fff;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .sp-logo-wrap { background: #1a1a1a; box-shadow: 0 2px 14px rgba(0,0,0,0.4); }
+
+.sp-logo-img { width: 64px !important; height: 64px !important; object-fit: cover; }
+
+.sp-hero-text { flex: 1; }
+
+.sp-app-name {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -1.2px;
+  line-height: 1;
+  margin: 0 0 5px;
+}
+
+.sp-tagline { font-size: 0.88rem; color: var(--text-muted); font-weight: 400; margin: 0; }
+
+.sp-creator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px 7px 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  animation: spItemIn 0.45s ease 0.18s both;
+}
+
+.sp-creator:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+}
+
+.dark .sp-creator:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.35); }
+
+.sp-creator-av { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+
+.sp-creator-info { display: flex; flex-direction: column; gap: 1px; }
+
+.sp-creator-name { font-size: 0.8rem; font-weight: 700; color: var(--text); white-space: nowrap; line-height: 1.2; }
+
+.sp-creator-role { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; line-height: 1.2; }
+
+.sp-li-badge {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: #0A66C2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sp-card {
+  padding: 18px 16px;
+  background: var(--surface);
+  border: 1px solid rgba(0,0,0,0.055);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: spItemIn 0.4s ease both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+
+.dark .sp-card { border-color: rgba(255,255,255,0.055); box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+
+.sp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.09); }
+
+.dark .sp-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+
+.sp-card-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-card-title { font-size: 0.88rem; font-weight: 700; color: var(--text); letter-spacing: -0.1px; margin: 0; }
+
+.sp-card-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; margin: 0; }
+
+.sp-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: spItemIn 0.45s ease 0.5s both;
+}
+
+.sp-progress-track { width: 100%; height: 2px; background: var(--border); border-radius: 999px; overflow: hidden; }
+
+.sp-progress-fill { height: 100%; background: var(--text); border-radius: 999px; transition: width 0.95s linear; }
+
+.sp-footer-row { display: flex; align-items: center; justify-content: space-between; }
+
+.sp-timer { font-size: 0.8rem; color: var(--text-muted); }
+
+.sp-timer strong { color: var(--text); font-weight: 700; }
+
+.sp-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.16);
+}
+
+.sp-cta:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(0,0,0,0.22); opacity: 0.9; }
+
+@media (max-width: 680px) {
+  .sp-root { padding: 20px 16px; align-items: flex-start; padding-top: 36px; }
+  .sp-shell { gap: 22px; }
+  .sp-hero { flex-wrap: wrap; gap: 14px; }
+  .sp-creator { order: 3; align-self: flex-start; }
+  .sp-logo-wrap { width: 52px; height: 52px; border-radius: 14px; }
+  .sp-logo-img { width: 52px !important; height: 52px !important; }
+  .sp-app-name { font-size: 1.55rem; }
+  .sp-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .sp-card { padding: 14px 12px; gap: 7px; }
+  .sp-card-desc { display: none; }
+}
+
+@media (max-width: 400px) {
+  .sp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sp-app-name { font-size: 1.35rem; }
+  .sp-cta { padding: 0 16px; font-size: 0.8rem; }
 }

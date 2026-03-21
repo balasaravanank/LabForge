@@ -5,6 +5,7 @@ import DocumentInfoForm from "@/components/DocumentInfoForm";
 import ExperimentList from "@/components/ExperimentList";
 import PreviewModal from "@/components/PreviewModal";
 import HistoryPanel from "@/components/HistoryPanel";
+import SplashScreen from "@/components/SplashScreen";
 import { DocumentInfo, Experiment, HistoryEntry } from "@/lib/types";
 import { useHistory } from "@/lib/useHistory";
 import { Eye, FileDown, FileText, Link2, Check } from "lucide-react";
@@ -24,6 +25,7 @@ const defaultExperiments: Experiment[] = [
 ];
 
 export default function Home() {
+  const [showSplash, setShowSplash] = useState(true);
   const [docInfo, setDocInfo] = useState<DocumentInfo>(defaultDocInfo);
   const [experiments, setExperiments] = useState<Experiment[]>(defaultExperiments);
   const [showPreview, setShowPreview] = useState(false);
@@ -33,6 +35,10 @@ export default function Home() {
   const { entries, addEntry, deleteEntry, clearAll } = useHistory();
   const saveProfile = useSaveProfile();
   const { copyShareLink } = useShareableLink();
+
+  function handleSplashDone() {
+    setShowSplash(false);
+  }
 
   // Hydrate from shared URL first, then fall back to saved profile
   useEffect(() => {
@@ -105,7 +111,9 @@ export default function Home() {
     experiments.some((e) => e.title.trim());
 
   return (
-    <div className="app-root">
+    <>
+      {showSplash && <SplashScreen onEnter={handleSplashDone} />}
+      <div className="app-root" style={{ visibility: showSplash ? "hidden" : "visible" }}>
       {/* Hero Gradient Background */}
       <div className="hero-glow" />
 
@@ -224,5 +232,6 @@ export default function Home() {
         />
       )}
     </div>
+    </>
   );
 }
