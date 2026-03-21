@@ -120,7 +120,7 @@ export default function SplashScreen({ onEnter }: SplashScreenProps) {
             </div>
             <div className="sp-creator-info">
               <span className="sp-creator-name">Bala Saravanan K</span>
-              <span className="sp-creator-role">Kitzo CEO</span>
+              <span className="sp-creator-role">Developer</span>
             </div>
             <div className="sp-li-badge" aria-label="LinkedIn">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
