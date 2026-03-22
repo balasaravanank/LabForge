@@ -158,7 +158,13 @@ export async function generatePDF(docInfo: DocumentInfo, experiments: Experiment
     pdf.setFont("times", "bold");
     pdf.setFontSize(12);
     pdf.setTextColor(...BLACK);
-    pdf.text(nameText, COL_X[2] + CELL_PAD, textY);
+    
+    // Draw name text line by line using our explicit lineH
+    for (let i = 0; i < nameText.length; i++) {
+      const lineY = textY + i * lineH;
+      pdf.text(nameText[i], COL_X[2] + CELL_PAD, lineY);
+    }
+    
     textY += nameText.length * lineH + lineH * 0.5;
 
     if (linkText.length > 0) {
