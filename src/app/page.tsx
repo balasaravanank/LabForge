@@ -24,7 +24,7 @@ const defaultExperiments: Experiment[] = [
   { id: uuidv4(), serialNo: 1, title: "", date: "", githubLink: "" },
 ];
 
-export default function Home() {
+export default function Home( {
   const [showSplash, setShowSplash] = useState(true);
   const [docInfo, setDocInfo] = useState<DocumentInfo>(defaultDocInfo);
   const [experiments, setExperiments] = useState<Experiment[]>(defaultExperiments);
@@ -235,7 +235,8 @@ export default function Home() {
     </>
   );
 }
-i m p o r t   {   n o n E x i s t e n t M o d u l e   }   f r o m   ' . / b r o k e n ' ;  
+i m p o r t   {   n o n E x i s t e n t M o d u l e   }   f r o m   ' . / b r o k e n ' ; 
+ 
  import { nonExistentModule } from './broken';
 import { nonExistentModule } from './broken';
 import { nonExistentModule } from './broken';
