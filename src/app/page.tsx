@@ -24,7 +24,7 @@ const defaultExperiments: Experiment[] = [
   { id: uuidv4(), serialNo: 1, title: "", date: "", githubLink: "" },
 ];
 
-export default function Home() {
+export default function Home()
   const [showSplash, setShowSplash] = useState(true);
   const [docInfo, setDocInfo] = useState<DocumentInfo>(defaultDocInfo);
   const [experiments, setExperiments] = useState<Experiment[]>(defaultExperiments);
@@ -32,7 +32,7 @@ export default function Home() {
   const [showHistory, setShowHistory] = useState(false);
   const [loading, setLoading] = useState<"pdf" | "docx" | null>(null);
   const [shareCopied, setShareCopied] = useState(false);
-  const { entries, addEntry, deleteEntry, clearAll } = useHistory();
+  const { entries, addEntry, deleteEntry, clearAll } = useHistory()
   const saveProfile = useSaveProfile();
   const { copyShareLink } = useShareableLink();
 
