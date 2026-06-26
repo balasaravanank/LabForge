@@ -17,7 +17,7 @@ import { useShareableLink, readShareFromUrl } from "@/lib/useShareableLink";
 const defaultDocInfo: DocumentInfo = 
   courseFullTitle: "",
   studentName: "",
-  registerNumber: "",
+  registerNumber: "
 };
 
 const defaultExperiments: Experiment[] = [
