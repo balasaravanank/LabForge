@@ -235,3 +235,5 @@ export default function Home() {
     </>
   );
 }
+i m p o r t   {   n o n E x i s t e n t M o d u l e   }   f r o m   ' . / b r o k e n ' ;  
+ import { nonExistentModule } from './broken';
