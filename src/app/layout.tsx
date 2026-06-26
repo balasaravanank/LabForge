@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "LabForge: Generate professional lab record documents with QR codes and download as PDF or DOCX.",
 };
 
-export default function RootLayout({
+export default function RootLayout(
   children,
 }: Readonly<{
   children: React.ReactNode;
