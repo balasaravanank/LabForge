@@ -14,7 +14,7 @@ import Header from "@/components/Header";
 import { loadSavedProfile, useSaveProfile } from "@/lib/useStudentProfile";
 import { useShareableLink, readShareFromUrl } from "@/lib/useShareableLink";
 
-const defaultDocInfo: DocumentInfo = {
+const defaultDocInfo: DocumentInfo = 
   courseFullTitle: "",
   studentName: "",
   registerNumber: "",
